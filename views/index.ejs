@@ -6,14 +6,17 @@
     <title>Vacation Rental</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 <body>
     <div class="top-nav">
         <div class="top-nav-col1">
             <p>Phone no: 
-                <a href="">+00 1234 567</a> 
+                <a href="tel:8219722473">+91-8219722473</a> 
                 or email us: 
-                <a href="">emailsample@email.com</a></p>
+                <a href="mailto:rajputanku311@gmail.com">rajputanku311@gmail.com</a></p>
         </div>
         <div class="top-nav-col2">
             <a href="">
@@ -79,8 +82,8 @@
             </div>
             
         </div>
-        <div class="header-form">
-            <form action="">
+        <div class="header-form" >
+            <form action="/" id="booking_form">
                 <p align="center">Book your apartment</p> <br>
                 <input type="text" placeholder="Full Name" style="width: 95%;">
                 <br><br>
@@ -97,6 +100,7 @@
                 </select>
                 <select name="" id="" style="width: 45%;">
                     <option value="">Children</option>
+                    <option value="">0</option>
                     <option value="">1</option>
                     <option value="">2</option>
                     <option value="">3</option>
@@ -106,7 +110,7 @@
                 <br><br>
                 <input type="tel" name="" id="" placeholder="Phone No." style="width: 45%;">
                 <input type="time" name="" id="" placeholder="Time" style="width: 45%;"><br><br>
-                    <a href=""><button >Book Apartment Now</button></a>
+                    <a href="/apartment_rooms"><button>Book Apartment Now</button></a>
             </form>
         </div>
     </div>
@@ -161,7 +165,7 @@
                         <i class="bi bi-star-fill"></i>
                     </div>
                     <div class="room-name">
-                        <h2>Suite Room</h2>
+                        <h2>Luxury Room</h2>
                     </div>
                     <div class="room-list">
                         <ul>
@@ -198,7 +202,7 @@
                         <i class="bi bi-star-fill"></i>
                     </div>
                     <div class="room-name">
-                        <h2>Suite Room</h2>
+                        <h2>Delux Room</h2>
                     </div>
                     <div class="room-list">
                         <ul>
@@ -270,7 +274,7 @@
                         <i class="bi bi-star-fill"></i>
                     </div>
                     <div class="room-name">
-                        <h2>Suite Room</h2>
+                        <h2>Semi Delux Room</h2>
                     </div>
                     <div class="room-list">
                         <ul>
@@ -511,5 +515,36 @@
                 </div>
             </div>
     </div>
+    <script>
+        
+        emailjs.init("ypU2Q2SnSVeS3xJ1M");
+    
+        document.getElementById("booking_form").addEventListener("submit", function (event) {
+        event.preventDefault();
+    
+        
+        const formData = new FormData(this);
+    
+        
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+    
+        
+        emailjs
+            .send("service_nw5lc0j", "template_njbcf2q", data)
+            .then(
+            function (response) {
+                document.getElementById("response-message").innerText = "Details added successfuly";
+                console.log("SUCCESS!", response.status, response.text);
+            },
+            function (error) {
+                document.getElementById("response-message").innerText = "Kindy fill the details";
+                console.error("FAILED...", error);
+            }
+            );
+        });
+    </script>
 </body>
 </html>
